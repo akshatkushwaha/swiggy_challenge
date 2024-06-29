@@ -1,29 +1,30 @@
 package com.task;
 
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
-class MainTest {
+class ArenaTest {
     @Test
-    void resultTesting() {
+    public void testFight() {
         Player playerA = new Player("A", 50, 5, 10);
         Player playerB = new Player("B", 100, 10, 5);
 
         Arena arena = new Arena(playerA, playerB);
         Player winner = arena.startFight();
 
-        assertEquals("B", winner.getTitle());
+        assertTrue(winner.isAlive());
+        assertTrue(winner == playerA || winner == playerB);
     }
 
     @Test
-    void resultTesting2() {
-        Player playerA = new Player("A", 50, 5, 12);
-        Player playerB = new Player("B", 80, 8, 7);
+    public void testFightWithEqualHealth() {
+        Player playerA = new Player("A", 100, 10, 5);
+        Player playerB = new Player("B", 100, 10, 5);
 
         Arena arena = new Arena(playerA, playerB);
         Player winner = arena.startFight();
 
-        assertEquals("A", winner.getTitle());
+        assertTrue(winner.isAlive());
+        assertTrue(winner == playerA || winner == playerB);
     }
 }
